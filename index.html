@@ -1231,7 +1231,9 @@ async function submitForm(){
   try {
     const response = await fetch('https://pm7000-api.paulpostle.workers.dev',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      mode:'cors',
+headers:{'Content-Type':'application/json'},
+        headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
         model:'claude-sonnet-4-20250514',
         max_tokens:1000,
