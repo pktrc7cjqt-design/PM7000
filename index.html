@@ -11,12 +11,12 @@
 
 :root{
   --black:#1a1a18;
-  --mid:#1a1a18;
-  --light:#2563a8;
-  --rule:#dde3ec;
-  --bg:#f2f5f9;
+  --mid:#6b6b67;
+  --light:#c8c8c2;
+  --rule:#e0e0da;
+  --bg:#f5f5f0;
   --white:#ffffff;
-  --accent:#2563a8;
+  --accent:#1a1a18;
   --mono:'IBM Plex Mono',monospace;
   --sans:'IBM Plex Sans',sans-serif;
 }
@@ -54,20 +54,20 @@ body{
 }
 .doc-header-left .module-tag{
   font-family:var(--mono);
-  font-size:10px;
+  font-size:9px;
   letter-spacing:.14em;
   text-transform:uppercase;
-  color:var(--light);
+  color:var(--mid);
   margin-bottom:.35rem;
 }
 .doc-header-left h1{
-  font-size:26px;
+  font-size:22px;
   font-weight:500;
   line-height:1.15;
   margin-bottom:.25rem;
 }
 .doc-header-left .subtitle{
-  font-size:14px;
+  font-size:12px;
   color:var(--mid);
 }
 .page-indicator{
@@ -76,7 +76,6 @@ body{
   color:var(--light);
   letter-spacing:.06em;
   white-space:nowrap;
-  font-weight:500;
 }
 
 /* ── STUDENT FIELDS ── */
@@ -93,10 +92,10 @@ body{
 .field:last-child{border-right:none}
 .field label{
   font-family:var(--mono);
-  font-size:10px;
+  font-size:8px;
   letter-spacing:.1em;
   text-transform:uppercase;
-  color:var(--light);
+  color:var(--mid);
   display:block;
   margin-bottom:.4rem;
 }
@@ -105,20 +104,20 @@ body{
   border:none;
   border-bottom:0.5px solid var(--mid);
   font-family:var(--sans);
-  font-size:15px;
+  font-size:12px;
   font-weight:300;
   color:var(--black);
   background:transparent;
-  padding:.2rem 0;
+  padding:.15rem 0;
   outline:none;
 }
 
 /* ── INTRO ── */
 .intro{
-  font-size:15px;
-  color:var(--black);
+  font-size:12px;
+  color:var(--mid);
   line-height:1.7;
-  border-left:3px solid var(--light);
+  border-left:2px solid var(--rule);
   padding-left:1rem;
   margin-bottom:2rem;
 }
@@ -139,16 +138,16 @@ body{
 }
 .lo-tag{
   font-family:var(--mono);
-  font-size:10px;
+  font-size:8px;
   letter-spacing:.1em;
   text-transform:uppercase;
-  color:var(--light);
-  padding:2px 6px;
+  color:var(--mid);
+  padding:1px 5px;
   border:0.5px solid var(--light);
   white-space:nowrap;
 }
 .section-title{
-  font-size:15px;
+  font-size:12px;
   font-weight:500;
 }
 
@@ -159,8 +158,8 @@ body{
 }
 .criterion:last-of-type{border-bottom:none}
 .crit-statement{
-  font-size:15px;
-  line-height:1.65;
+  font-size:12px;
+  line-height:1.6;
   margin-bottom:.65rem;
   color:var(--black);
 }
@@ -170,8 +169,8 @@ body{
   margin-bottom:.2rem;
   font-size:11px;
   font-family:var(--mono);
-  letter-spacing:.07em;
-  color:var(--light);
+  letter-spacing:.05em;
+  color:var(--mid);
   text-transform:uppercase;
 }
 textarea{
@@ -179,15 +178,15 @@ textarea{
   border:none;
   border-bottom:0.5px solid var(--rule);
   font-family:var(--sans);
-  font-size:15px;
+  font-size:12px;
   font-weight:300;
   color:var(--black);
   background:transparent;
   resize:none;
   outline:none;
   line-height:1.8;
-  padding:.15rem 0;
-  min-height:64px;
+  padding:.1rem 0;
+  min-height:52px;
 }
 textarea::placeholder{color:var(--light)}
 
@@ -202,10 +201,10 @@ textarea::placeholder{color:var(--light)}
 }
 .rating-label{
   font-family:var(--mono);
-  font-size:10px;
+  font-size:8px;
   letter-spacing:.1em;
   text-transform:uppercase;
-  color:var(--light);
+  color:var(--mid);
   white-space:nowrap;
 }
 .rating-opts{
@@ -216,10 +215,10 @@ textarea::placeholder{color:var(--light)}
   flex:1;
   text-align:center;
   font-family:var(--mono);
-  font-size:10px;
-  line-height:1.45;
-  color:var(--light);
-  padding:.45rem .2rem;
+  font-size:8px;
+  line-height:1.4;
+  color:var(--mid);
+  padding:.35rem .2rem;
   border:0.5px solid var(--rule);
   border-right:none;
   cursor:pointer;
@@ -238,10 +237,10 @@ textarea::placeholder{color:var(--light)}
 }
 .sum-label{
   font-family:var(--mono);
-  font-size:10px;
+  font-size:8px;
   letter-spacing:.1em;
   text-transform:uppercase;
-  color:var(--light);
+  color:var(--mid);
   display:block;
   margin-bottom:.4rem;
 }
@@ -255,15 +254,15 @@ textarea::placeholder{color:var(--light)}
 }
 .priority-title{
   font-family:var(--mono);
-  font-size:10px;
+  font-size:8px;
   letter-spacing:.14em;
   text-transform:uppercase;
-  color:var(--light);
+  color:var(--mid);
   margin-bottom:.5rem;
 }
 .priority-note{
-  font-size:14px;
-  color:var(--black);
+  font-size:11px;
+  color:var(--mid);
   line-height:1.65;
   margin-bottom:1rem;
 }
@@ -277,7 +276,7 @@ textarea::placeholder{color:var(--light)}
 .p-item:last-child{margin-bottom:0}
 .p-num{
   font-family:var(--mono);
-  font-size:12px;
+  font-size:9px;
   color:var(--mid);
   padding-top:2px;
 }
@@ -293,10 +292,10 @@ textarea::placeholder{color:var(--light)}
   border-bottom:0.5px solid var(--rule);
   background:var(--bg);
   font-family:var(--mono);
-  font-size:10px;
+  font-size:8px;
   letter-spacing:.12em;
   text-transform:uppercase;
-  color:var(--light);
+  color:var(--mid);
 }
 .cl-item{
   display:grid;
@@ -305,7 +304,7 @@ textarea::placeholder{color:var(--light)}
   padding:.5rem .85rem;
   border-bottom:0.5px solid var(--rule);
   align-items:center;
-  font-size:15px;
+  font-size:12px;
   cursor:pointer;
 }
 .cl-item:last-child{border-bottom:none}
@@ -346,8 +345,8 @@ textarea::placeholder{color:var(--light)}
 .btn-submit:hover{opacity:.8}
 .btn-submit:disabled{opacity:.4;cursor:not-allowed}
 .submit-note{
-  font-size:12px;
-  color:var(--light);
+  font-size:10px;
+  color:var(--mid);
   margin-top:.75rem;
   font-family:var(--mono);
   letter-spacing:.06em;
@@ -365,7 +364,7 @@ textarea::placeholder{color:var(--light)}
   font-size:10px;
   letter-spacing:.12em;
   text-transform:uppercase;
-  color:var(--light);
+  color:var(--mid);
   margin-bottom:1rem;
 }
 .spinner{
@@ -409,10 +408,9 @@ textarea::placeholder{color:var(--light)}
 .fb-header .fb-meta{
   font-family:var(--mono);
   font-size:9px;
-  color:var(--light);
+  color:var(--mid);
   text-align:right;
   line-height:1.8;
-  font-weight:500;
 }
 
 /* ── GRADE BAND CARD ── */
@@ -437,19 +435,19 @@ textarea::placeholder{color:var(--light)}
   font-family:var(--mono);
   font-size:9px;
   letter-spacing:.1em;
-  color:var(--light);
+  color:var(--mid);
   text-transform:uppercase;
   margin-top:.35rem;
 }
 .grade-right{}
 .grade-descriptor{
-  font-size:15px;
+  font-size:13px;
   font-weight:500;
   margin-bottom:.4rem;
 }
 .grade-note{
-  font-size:13px;
-  color:var(--black);
+  font-size:11px;
+  color:var(--mid);
   line-height:1.65;
 }
 
@@ -473,7 +471,7 @@ textarea::placeholder{color:var(--light)}
 }
 .fb-body{
   padding:1rem;
-  font-size:15px;
+  font-size:12.5px;
   line-height:1.8;
   color:var(--black);
 }
@@ -491,11 +489,10 @@ textarea::placeholder{color:var(--light)}
   border-bottom:0.5px solid var(--rule);
   background:var(--bg);
   font-family:var(--mono);
-  font-size:10px;
+  font-size:8px;
   letter-spacing:.12em;
   text-transform:uppercase;
-  color:var(--light);
-  font-weight:500;
+  color:var(--mid);
 }
 .tutor-notes-body{
   padding:1rem;
@@ -505,7 +502,7 @@ textarea::placeholder{color:var(--light)}
   grid-template-columns:16px 1fr;
   gap:.6rem;
   margin-bottom:.6rem;
-  font-size:15px;
+  font-size:12px;
   line-height:1.6;
   align-items:start;
 }
@@ -521,11 +518,10 @@ textarea::placeholder{color:var(--light)}
 /* ── DISCLAIMER ── */
 .disclaimer{
   font-family:var(--mono);
-  font-size:11px;
-  letter-spacing:.04em;
+  font-size:9px;
+  letter-spacing:.06em;
   color:var(--light);
   line-height:1.7;
-  opacity:.8;
   border-top:0.5px solid var(--rule);
   padding-top:1rem;
   margin-top:2rem;
@@ -1229,11 +1225,9 @@ async function submitForm(){
   animateLoading();
 
   try {
-    const response = await fetch('https://pm7000-api.paulpostle.workers.dev',{
+    const response = await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      mode:'cors',
-headers:{'Content-Type':'application/json'},
-        headers:{'Content-Type':'application/json'},
+      headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
         model:'claude-sonnet-4-20250514',
         max_tokens:1000,
