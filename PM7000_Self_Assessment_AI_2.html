@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PM7000 — Capstone Self-Assessment</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --black:#1a1a18;
+  --mid:#1a1a18;
+  --light:#2563a8;
+  --rule:#dde3ec;
+  --bg:#f2f5f9;
+  --white:#ffffff;
+  --accent:#2563a8;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'IBM Plex Sans',sans-serif;
+}
+
+body{
+  font-family:var(--sans);
+  font-weight:300;
+  color:var(--black);
+  background:var(--bg);
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+/* ── SCREENS ── */
+.screen{display:none}
+.screen.active{display:block}
+
+/* ── WRAPPER ── */
+.wrap{
+  max-width:860px;
+  margin:0 auto;
+  padding:2rem 1.5rem 4rem;
+}
+
+/* ── HEADER ── */
+.doc-header{
+  border-top:2.5px solid var(--black);
+  border-bottom:0.5px solid var(--rule);
+  padding:1.25rem 0 1rem;
+  margin-bottom:1.75rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:1rem;
+}
+.doc-header-left .module-tag{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--light);
+  margin-bottom:.35rem;
+}
+.doc-header-left h1{
+  font-size:26px;
+  font-weight:500;
+  line-height:1.15;
+  margin-bottom:.25rem;
+}
+.doc-header-left .subtitle{
+  font-size:14px;
+  color:var(--mid);
+}
+.page-indicator{
+  font-family:var(--mono);
+  font-size:9px;
+  color:var(--light);
+  letter-spacing:.06em;
+  white-space:nowrap;
+  font-weight:500;
+}
+
+/* ── STUDENT FIELDS ── */
+.fields{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1fr;
+  border:0.5px solid var(--rule);
+  margin-bottom:1.5rem;
+}
+.field{
+  padding:.55rem .85rem;
+  border-right:0.5px solid var(--rule);
+}
+.field:last-child{border-right:none}
+.field label{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--light);
+  display:block;
+  margin-bottom:.4rem;
+}
+.field input{
+  width:100%;
+  border:none;
+  border-bottom:0.5px solid var(--mid);
+  font-family:var(--sans);
+  font-size:15px;
+  font-weight:300;
+  color:var(--black);
+  background:transparent;
+  padding:.2rem 0;
+  outline:none;
+}
+
+/* ── INTRO ── */
+.intro{
+  font-size:15px;
+  color:var(--black);
+  line-height:1.7;
+  border-left:3px solid var(--light);
+  padding-left:1rem;
+  margin-bottom:2rem;
+}
+
+/* ── SECTION ── */
+.section{
+  margin-bottom:2rem;
+  background:var(--white);
+  border:0.5px solid var(--rule);
+}
+.section-head{
+  display:flex;
+  align-items:baseline;
+  gap:.6rem;
+  padding:.75rem 1rem;
+  border-bottom:0.5px solid var(--rule);
+  background:var(--bg);
+}
+.lo-tag{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--light);
+  padding:2px 6px;
+  border:0.5px solid var(--light);
+  white-space:nowrap;
+}
+.section-title{
+  font-size:15px;
+  font-weight:500;
+}
+
+/* ── CRITERION ── */
+.criterion{
+  padding:.85rem 1rem .65rem;
+  border-bottom:0.5px solid var(--rule);
+}
+.criterion:last-of-type{border-bottom:none}
+.crit-statement{
+  font-size:15px;
+  line-height:1.65;
+  margin-bottom:.65rem;
+  color:var(--black);
+}
+.crit-statement strong{
+  font-weight:500;
+  display:block;
+  margin-bottom:.2rem;
+  font-size:11px;
+  font-family:var(--mono);
+  letter-spacing:.07em;
+  color:var(--light);
+  text-transform:uppercase;
+}
+textarea{
+  width:100%;
+  border:none;
+  border-bottom:0.5px solid var(--rule);
+  font-family:var(--sans);
+  font-size:15px;
+  font-weight:300;
+  color:var(--black);
+  background:transparent;
+  resize:none;
+  outline:none;
+  line-height:1.8;
+  padding:.15rem 0;
+  min-height:64px;
+}
+textarea::placeholder{color:var(--light)}
+
+/* ── RATING ── */
+.rating-row{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  padding:.6rem 1rem;
+  background:var(--bg);
+  border-top:0.5px solid var(--rule);
+}
+.rating-label{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--light);
+  white-space:nowrap;
+}
+.rating-opts{
+  display:flex;
+  flex:1;
+}
+.r-opt{
+  flex:1;
+  text-align:center;
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.45;
+  color:var(--light);
+  padding:.45rem .2rem;
+  border:0.5px solid var(--rule);
+  border-right:none;
+  cursor:pointer;
+  transition:background .1s,color .1s;
+  user-select:none;
+}
+.r-opt:last-child{border-right:0.5px solid var(--rule)}
+.r-opt:hover{background:var(--rule)}
+.r-opt.sel{background:var(--black);color:var(--white);border-color:var(--black)}
+
+/* ── SECTION SUMMARY ── */
+.section-summary{
+  padding:.75rem 1rem;
+  border-top:0.5px solid var(--rule);
+  background:var(--bg);
+}
+.sum-label{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--light);
+  display:block;
+  margin-bottom:.4rem;
+}
+
+/* ── PRIORITY BOX ── */
+.priority{
+  border:0.75px solid var(--black);
+  padding:1rem 1.25rem;
+  margin-bottom:1.5rem;
+  background:var(--white);
+}
+.priority-title{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--light);
+  margin-bottom:.5rem;
+}
+.priority-note{
+  font-size:14px;
+  color:var(--black);
+  line-height:1.65;
+  margin-bottom:1rem;
+}
+.p-item{
+  display:grid;
+  grid-template-columns:18px 1fr;
+  gap:.6rem;
+  margin-bottom:.85rem;
+  align-items:start;
+}
+.p-item:last-child{margin-bottom:0}
+.p-num{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--mid);
+  padding-top:2px;
+}
+
+/* ── CHECKLIST ── */
+.checklist{
+  background:var(--white);
+  border:0.5px solid var(--rule);
+  margin-bottom:2rem;
+}
+.cl-head{
+  padding:.55rem .85rem;
+  border-bottom:0.5px solid var(--rule);
+  background:var(--bg);
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--light);
+}
+.cl-item{
+  display:grid;
+  grid-template-columns:16px 1fr;
+  gap:.6rem;
+  padding:.5rem .85rem;
+  border-bottom:0.5px solid var(--rule);
+  align-items:center;
+  font-size:15px;
+  cursor:pointer;
+}
+.cl-item:last-child{border-bottom:none}
+.cl-item:hover{background:var(--bg)}
+.cl-box{
+  width:11px;height:11px;
+  border:0.75px solid var(--light);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  transition:background .12s;
+}
+.cl-box.chk{background:var(--black);border-color:var(--black)}
+.cl-box.chk::after{
+  content:'';display:block;
+  width:5px;height:3px;
+  border-left:1.5px solid white;
+  border-bottom:1.5px solid white;
+  transform:rotate(-45deg) translateY(-1px);
+}
+
+/* ── SUBMIT BUTTON ── */
+.submit-wrap{
+  text-align:center;
+  margin:2rem 0;
+}
+.btn-submit{
+  background:var(--black);
+  color:var(--white);
+  border:none;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:.85rem 2.5rem;
+  cursor:pointer;
+  transition:opacity .15s;
+}
+.btn-submit:hover{opacity:.8}
+.btn-submit:disabled{opacity:.4;cursor:not-allowed}
+.submit-note{
+  font-size:12px;
+  color:var(--light);
+  margin-top:.75rem;
+  font-family:var(--mono);
+  letter-spacing:.06em;
+}
+
+/* ── LOADING ── */
+.loading{
+  display:none;
+  text-align:center;
+  padding:3rem;
+}
+.loading.active{display:block}
+.loading-title{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--light);
+  margin-bottom:1rem;
+}
+.spinner{
+  width:32px;height:32px;
+  border:2px solid var(--rule);
+  border-top-color:var(--black);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+  margin:0 auto 1rem;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-steps{
+  font-size:11px;
+  color:var(--light);
+  line-height:2;
+}
+.loading-steps span.done{color:var(--mid)}
+.loading-steps span.active{color:var(--black);font-weight:500}
+
+/* ── FEEDBACK SCREEN ── */
+.feedback-wrap{
+  max-width:860px;
+  margin:0 auto;
+  padding:2rem 1.5rem 4rem;
+}
+
+.fb-header{
+  border-top:2.5px solid var(--black);
+  border-bottom:0.5px solid var(--rule);
+  padding:1.25rem 0 1rem;
+  margin-bottom:1.75rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+}
+.fb-header h1{
+  font-size:22px;
+  font-weight:500;
+  line-height:1.15;
+}
+.fb-header .fb-meta{
+  font-family:var(--mono);
+  font-size:9px;
+  color:var(--light);
+  text-align:right;
+  line-height:1.8;
+  font-weight:500;
+}
+
+/* ── GRADE BAND CARD ── */
+.grade-card{
+  border:1.5px solid var(--black);
+  padding:1.25rem 1.5rem;
+  margin-bottom:2rem;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:1.5rem;
+  align-items:center;
+  background:var(--white);
+}
+.grade-band{
+  font-family:var(--mono);
+  font-size:36px;
+  font-weight:500;
+  line-height:1;
+  color:var(--black);
+}
+.grade-band-sub{
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:.1em;
+  color:var(--light);
+  text-transform:uppercase;
+  margin-top:.35rem;
+}
+.grade-right{}
+.grade-descriptor{
+  font-size:15px;
+  font-weight:500;
+  margin-bottom:.4rem;
+}
+.grade-note{
+  font-size:13px;
+  color:var(--black);
+  line-height:1.65;
+}
+
+/* ── FEEDBACK SECTIONS ── */
+.fb-section{
+  background:var(--white);
+  border:0.5px solid var(--rule);
+  margin-bottom:1.25rem;
+}
+.fb-section-head{
+  display:flex;
+  align-items:baseline;
+  gap:.6rem;
+  padding:.7rem 1rem;
+  border-bottom:0.5px solid var(--rule);
+  background:var(--bg);
+}
+.fb-section-title{
+  font-size:12px;
+  font-weight:500;
+}
+.fb-body{
+  padding:1rem;
+  font-size:15px;
+  line-height:1.8;
+  color:var(--black);
+}
+.fb-body p{margin-bottom:.75rem}
+.fb-body p:last-child{margin-bottom:0}
+
+/* ── TUTOR NOTES ── */
+.tutor-notes{
+  background:var(--white);
+  border:0.5px solid var(--rule);
+  margin-bottom:1.25rem;
+}
+.tutor-notes-head{
+  padding:.7rem 1rem;
+  border-bottom:0.5px solid var(--rule);
+  background:var(--bg);
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--light);
+  font-weight:500;
+}
+.tutor-notes-body{
+  padding:1rem;
+}
+.tutor-note-item{
+  display:grid;
+  grid-template-columns:16px 1fr;
+  gap:.6rem;
+  margin-bottom:.6rem;
+  font-size:15px;
+  line-height:1.6;
+  align-items:start;
+}
+.tutor-note-item:last-child{margin-bottom:0}
+.note-dot{
+  width:5px;height:5px;
+  background:var(--black);
+  border-radius:50%;
+  margin-top:.45rem;
+  flex-shrink:0;
+}
+
+/* ── DISCLAIMER ── */
+.disclaimer{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.04em;
+  color:var(--light);
+  line-height:1.7;
+  opacity:.8;
+  border-top:0.5px solid var(--rule);
+  padding-top:1rem;
+  margin-top:2rem;
+}
+
+/* ── ACTION ROW ── */
+.action-row{
+  display:flex;
+  gap:.75rem;
+  margin-top:1.75rem;
+  flex-wrap:wrap;
+}
+.btn{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:.65rem 1.5rem;
+  cursor:pointer;
+  border:0.5px solid var(--black);
+  background:transparent;
+  color:var(--black);
+  transition:background .12s,color .12s;
+}
+.btn:hover{background:var(--black);color:var(--white)}
+.btn-primary{background:var(--black);color:var(--white)}
+.btn-primary:hover{opacity:.8}
+
+/* ── FOOTER ── */
+.doc-footer{
+  margin-top:2rem;
+  padding-top:.75rem;
+  border-top:0.5px solid var(--rule);
+  font-family:var(--mono);
+  font-size:8px;
+  letter-spacing:.08em;
+  color:var(--light);
+  display:flex;
+  justify-content:space-between;
+}
+
+/* screen: print-cols is just a passthrough wrapper */
+.print-cols{ display:contents }
+.print-lines{ display:none }
+.print-page-break{ display:none }
+
+/* ── PRINT ── */
+@media print{
+  @page{ size:A3 portrait; margin:12mm 14mm }
+
+  body{ background:white; font-size:10px }
+
+  #screen-loading,
+  #screen-feedback,
+  .submit-wrap,
+  .action-row,
+  .btn,
+  .doc-footer{ display:none!important }
+
+  #screen-form{ display:block!important }
+
+  .wrap{ max-width:none; padding:0; margin:0 }
+
+  .doc-header{ padding:.4rem 0 .35rem; margin-bottom:.5rem }
+  .doc-header-left h1{ font-size:14px }
+  .doc-header-left .module-tag{ font-size:7px }
+  .doc-header-left .subtitle{ font-size:8px }
+  .page-indicator{ font-size:7px }
+
+  .fields{ margin-bottom:.6rem }
+  .field{ padding:.3rem .5rem }
+  .field label{ font-size:7px }
+  .field input{ font-size:9px; padding:.1rem 0 }
+
+  .intro{ font-size:8.5px; line-height:1.5; margin-bottom:.6rem; padding-left:.6rem }
+
+  .print-cols{ display:grid; grid-template-columns:1fr 1fr; gap:4mm }
+
+  .section{ margin-bottom:0; break-inside:avoid }
+  .section-head{ padding:.35rem .5rem }
+  .lo-tag{ font-size:6.5px; padding:1px 3px }
+  .section-title{ font-size:10px }
+
+  .criterion{ padding:.4rem .5rem .35rem }
+  .crit-statement{ font-size:9px; line-height:1.45; margin-bottom:.3rem }
+  .crit-statement strong{ font-size:7.5px; margin-bottom:.15rem }
+
+  textarea{ display:none!important }
+  .print-lines{ display:block }
+  .p-line{ display:block; width:100%; height:0.5px; background:#c0c0ba; margin-bottom:4mm }
+
+  .rating-row{ padding:.3rem .5rem }
+  .rating-label{ font-size:7px }
+  .r-opt{ font-size:7px; padding:.25rem .15rem; cursor:default }
+  .r-opt:hover{ background:transparent; color:var(--mid) }
+
+  .section-summary{ padding:.35rem .5rem }
+  .sum-label{ font-size:7px; margin-bottom:.25rem }
+
+  .print-page-break{ display:block; page-break-before:always; break-before:page; height:0 }
+
+  .priority{ padding:.6rem .75rem; margin-bottom:.6rem }
+  .priority-title{ font-size:7px; margin-bottom:.25rem }
+  .priority-note{ font-size:8.5px; line-height:1.4; margin-bottom:.5rem }
+  .p-item{ margin-bottom:.4rem; gap:.4rem }
+  .p-num{ font-size:8px }
+
+  .checklist{ margin-bottom:.5rem }
+  .cl-head{ font-size:7px; padding:.3rem .5rem }
+  .cl-item{ font-size:9px; padding:.3rem .5rem; cursor:default }
+  .cl-item:hover{ background:transparent }
+  .cl-box{ width:9px; height:9px }
+
+  .before-submit-note{ display:none!important }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ FORM SCREEN ═══════════════════════════ -->
+<div id="screen-form" class="screen active">
+<div class="wrap">
+
+  <div class="doc-header">
+    <div class="doc-header-left">
+      <p class="module-tag">PM7000 — Graduate Diploma Creative Practice · Kingston School of Art</p>
+      <h1>Capstone Project<br>Self-Assessment</h1>
+      <p class="subtitle">Complete honestly · Submit to receive indicative feedback · Bring to pre-submission tutorial</p>
+    </div>
+    <div class="page-indicator">AG1 2025–26 · AR3 2024–25</div>
+  </div>
+
+  <div class="fields">
+    <div class="field">
+      <label for="f-name">Student name</label>
+      <input type="text" id="f-name" placeholder="Full name">
+    </div>
+    <div class="field">
+      <label for="f-k">K number</label>
+      <input type="text" id="f-k" placeholder="K00000000">
+    </div>
+    <div class="field">
+      <label for="f-title">Project title</label>
+      <input type="text" id="f-title" placeholder="Your capstone title">
+    </div>
+    <div class="field">
+      <label for="f-date">Date</label>
+      <input type="date" id="f-date">
+    </div>
+  </div>
+
+  <p class="intro">Work through each section honestly. Your responses go directly to Claude, which will generate an indicative feedback report aligned to Kingston's AG1 Level 7 descriptors. This is not a mark — it is a starting point for your pre-submission tutorial discussion. The more honestly you write, the more useful the feedback will be.</p>
+
+  <div class="print-cols">
+  <!-- ── SECTION 1: RESEARCH ── -->
+  <div class="section">
+    <div class="section-head">
+      <span class="lo-tag">LO2 · LO3</span>
+      <span class="section-title">1 — Research and analysis</span>
+    </div>
+
+    <div class="criterion">
+      <div class="crit-statement">
+        <strong>Secondary research</strong>
+        Describe your secondary research. What books, articles, practitioners, or theoretical frameworks did you engage with? How did this research shape the direction of your project — not just what you found, but what you did with it.
+      </div>
+      <textarea id="s1q1" placeholder="Write here — be specific about sources and how they influenced your thinking…" rows="3"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+
+    <div class="criterion">
+      <div class="crit-statement">
+        <strong>Primary research</strong>
+        What primary research did you undertake (observation, experiments, field visits, interviews, making)? Explain why you chose these methods and what they revealed that secondary research could not.
+      </div>
+      <textarea id="s1q2" placeholder="Describe your methods and what you discovered…" rows="3"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+
+    <div class="criterion">
+      <div class="crit-statement">
+        <strong>Synthesis and methodology</strong>
+        How have you synthesised your research — shown how different sources connect and inform each other — rather than simply listing them? What methodology guided your research process and what were its limitations?
+      </div>
+      <textarea id="s1q3" placeholder="Explain how your research sources connect and what guided your approach…" rows="3"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+
+    <div class="rating-row">
+      <span class="rating-label">My honest rating</span>
+      <div class="rating-opts" id="r1">
+        <div class="r-opt" onclick="rate('r1',this)">A+/A/A-<br>70+</div>
+        <div class="r-opt" onclick="rate('r1',this)">B+/B/B-<br>60–69</div>
+        <div class="r-opt" onclick="rate('r1',this)">C+/C/C-<br>50–59</div>
+        <div class="r-opt" onclick="rate('r1',this)">FM<br>45–49</div>
+        <div class="r-opt" onclick="rate('r1',this)">F<br>44–</div>
+      </div>
+    </div>
+
+    <div class="section-summary">
+      <span class="sum-label">What is the weakest area in this section? One specific action before submission.</span>
+      <textarea id="s1gap" placeholder="Be specific — not 'do more research' but what exactly is missing and what you will do…" rows="2"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: EXPERIMENTATION ── -->
+  <div class="section">
+    <div class="section-head">
+      <span class="lo-tag">LO1 · LO6</span>
+      <span class="section-title">2 — Experimentation and practice</span>
+    </div>
+
+    <div class="criterion">
+      <div class="crit-statement">
+        <strong>Range of experimentation</strong>
+        Describe the range of visual and material experiments you undertook before arriving at your final direction. What different approaches did you test? What did not work, and what did that teach you?
+      </div>
+      <textarea id="s2q1" placeholder="Describe your experiments, what worked, what didn't, and what you learned…" rows="3"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+
+    <div class="criterion">
+      <div class="crit-statement">
+        <strong>Risk and iteration</strong>
+        Where did you take creative risks in this project? How does your portfolio show the evolution of the work — not just the final result but the iterations, revisions, and decisions made along the way?
+      </div>
+      <textarea id="s2q2" placeholder="Explain the risks you took and how the work evolved…" rows="3"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+
+    <div class="criterion">
+      <div class="crit-statement">
+        <strong>Skills development</strong>
+        What technical, material, or digital skills did you develop during this project? How are these documented and how did they contribute to the final outcome?
+      </div>
+      <textarea id="s2q3" placeholder="Describe skills you developed and how they are shown in the portfolio…" rows="3"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+
+    <div class="rating-row">
+      <span class="rating-label">My honest rating</span>
+      <div class="rating-opts" id="r2">
+        <div class="r-opt" onclick="rate('r2',this)">A+/A/A-<br>70+</div>
+        <div class="r-opt" onclick="rate('r2',this)">B+/B/B-<br>60–69</div>
+        <div class="r-opt" onclick="rate('r2',this)">C+/C/C-<br>50–59</div>
+        <div class="r-opt" onclick="rate('r2',this)">FM<br>45–49</div>
+        <div class="r-opt" onclick="rate('r2',this)">F<br>44–</div>
+      </div>
+    </div>
+
+    <div class="section-summary">
+      <span class="sum-label">What is the weakest area in this section? One specific action before submission.</span>
+      <textarea id="s2gap" placeholder="Be specific about what is missing and what you will do…" rows="2"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+  </div>
+
+  </div><!-- end print-cols p1 -->
+
+  <div class="print-page-break"></div>
+
+  <div class="print-cols">
+  <!-- ── SECTION 3: COMMUNICATION ── -->
+  <div class="section">
+    <div class="section-head">
+      <span class="lo-tag">LO4 · LO6</span>
+      <span class="section-title">3 — Communication, audience and presentation</span>
+    </div>
+
+    <div class="criterion">
+      <div class="crit-statement">
+        <strong>Final outcome and presentation</strong>
+        How is your final outcome presented? Describe the quality, format, and professional standard of the documentation. Does the portfolio read as a coherent, resolved project?
+      </div>
+      <textarea id="s3q1" placeholder="Describe how your final work is presented and its professional quality…" rows="3"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+
+    <div class="criterion">
+      <div class="crit-statement">
+        <strong>Audience and context</strong>
+        Who is your intended audience and where will this work exist or be encountered? Go beyond naming a demographic — explain how the audience will engage with the work and what communication problem or purpose the project addresses.
+      </div>
+      <textarea id="s3q2" placeholder="Describe your audience, the context of the work, and its communication purpose…" rows="3"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+
+    <div class="criterion">
+      <div class="crit-statement">
+        <strong>Written communication</strong>
+        How would you describe the quality of your written sections? Are you using specialist language accurately? Does your portfolio read at postgraduate level throughout?
+      </div>
+      <textarea id="s3q3" placeholder="Honestly assess the quality of your written communication…" rows="3"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+
+    <div class="rating-row">
+      <span class="rating-label">My honest rating</span>
+      <div class="rating-opts" id="r3">
+        <div class="r-opt" onclick="rate('r3',this)">A+/A/A-<br>70+</div>
+        <div class="r-opt" onclick="rate('r3',this)">B+/B/B-<br>60–69</div>
+        <div class="r-opt" onclick="rate('r3',this)">C+/C/C-<br>50–59</div>
+        <div class="r-opt" onclick="rate('r3',this)">FM<br>45–49</div>
+        <div class="r-opt" onclick="rate('r3',this)">F<br>44–</div>
+      </div>
+    </div>
+
+    <div class="section-summary">
+      <span class="sum-label">What is the weakest area in this section? One specific action before submission.</span>
+      <textarea id="s3gap" placeholder="Be specific about what is missing and what you will do…" rows="2"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+  </div>
+
+  <!-- ── SECTION 4: REFLECTION ── -->
+  <div class="section">
+    <div class="section-head">
+      <span class="lo-tag">LO5</span>
+      <span class="section-title">4 — Personal and professional development</span>
+    </div>
+
+    <div class="criterion">
+      <div class="crit-statement">
+        <strong>Critical reflection (Gibbs)</strong>
+        Describe your Gibbs reflection. Does it go beyond description of what happened to honest analysis of your learning, your feelings about the process, and what you would do differently? Which of the six stages feels weakest?
+      </div>
+      <textarea id="s4q1" placeholder="Describe the substance and honesty of your Gibbs reflection…" rows="3"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+
+    <div class="criterion">
+      <div class="crit-statement">
+        <strong>Response to feedback</strong>
+        How have you documented responses to peer and tutorial feedback in your portfolio? Give a specific example of feedback you received and how it changed your thinking or direction.
+      </div>
+      <textarea id="s4q2" placeholder="Give a specific example of feedback received and how it influenced the work…" rows="3"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+
+    <div class="criterion">
+      <div class="crit-statement">
+        <strong>Professional identity and development</strong>
+        How does this project connect to your professional ambitions or planned next steps — whether further study, professional practice, or another direction? How clearly is this articulated in your portfolio?
+      </div>
+      <textarea id="s4q3" placeholder="Describe how the project connects to your professional direction…" rows="3"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+
+    <div class="rating-row">
+      <span class="rating-label">My honest rating</span>
+      <div class="rating-opts" id="r4">
+        <div class="r-opt" onclick="rate('r4',this)">A+/A/A-<br>70+</div>
+        <div class="r-opt" onclick="rate('r4',this)">B+/B/B-<br>60–69</div>
+        <div class="r-opt" onclick="rate('r4',this)">C+/C/C-<br>50–59</div>
+        <div class="r-opt" onclick="rate('r4',this)">FM<br>45–49</div>
+        <div class="r-opt" onclick="rate('r4',this)">F<br>44–</div>
+      </div>
+    </div>
+
+    <div class="section-summary">
+      <span class="sum-label">What is the weakest area in this section? One specific action before submission.</span>
+      <textarea id="s4gap" placeholder="Be specific about what is missing and what you will do…" rows="2"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+  </div>
+
+  </div><!-- end print-cols p2 -->
+
+  <!-- ── PRIORITY ACTIONS ── -->
+  <div class="priority">
+    <p class="priority-title">Priority actions before submission</p>
+    <p class="priority-note">From the four sections above, identify the three most important things to fix or add before you bring your portfolio in next week. Be specific — not "improve research" but exactly what you will add and where.</p>
+    <div class="p-item">
+      <span class="p-num">01</span>
+      <textarea id="p1" placeholder="Specific action…" rows="2"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+    <div class="p-item">
+      <span class="p-num">02</span>
+      <textarea id="p2" placeholder="Specific action…" rows="2"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+    <div class="p-item">
+      <span class="p-num">03</span>
+      <textarea id="p3" placeholder="Specific action…" rows="2"></textarea
+      <div class="print-lines"><span class="p-line"></span><span class="p-line"></span></div>>
+    </div>
+  </div>
+
+  <!-- ── MANDATORY CHECKLIST ── -->
+  <div class="checklist">
+    <div class="cl-head">Mandatory submission checklist — tick only when confirmed</div>
+    <div class="cl-item" onclick="chk(this)">
+      <div class="cl-box"></div>
+      <span>Title page includes name, K number, module title, project title, pathway and year</span>
+    </div>
+    <div class="cl-item" onclick="chk(this)">
+      <div class="cl-box"></div>
+      <span>Contents page with accurate page numbers</span>
+    </div>
+    <div class="cl-item" onclick="chk(this)">
+      <div class="cl-box"></div>
+      <span>Harvard references and bibliography complete and consistent throughout</span>
+    </div>
+    <div class="cl-item" onclick="chk(this)">
+      <div class="cl-box"></div>
+      <span>All video / moving image links uploaded to OneDrive, YouTube or Vimeo and publicly accessible</span>
+    </div>
+    <div class="cl-item" onclick="chk(this)">
+      <div class="cl-box"></div>
+      <span>Gibbs Reflective Cycle covers all six stages</span>
+    </div>
+    <div class="cl-item" onclick="chk(this)">
+      <div class="cl-box"></div>
+      <span>Generative AI Declaration Form completed and included as the final page</span>
+    </div>
+    <div class="cl-item" onclick="chk(this)">
+      <div class="cl-box"></div>
+      <span>Both sections present — Capstone Brief and Collaborative Brief (Denim)</span>
+    </div>
+  </div>
+
+  <!-- ── SUBMIT ── -->
+  <div class="submit-wrap">
+    <p class="before-submit-note" style="font-size:12px;color:var(--black);line-height:1.7;border:0.5px solid var(--black);padding:.85rem 1.1rem;margin-bottom:1.25rem;text-align:left;max-width:560px;margin-left:auto;margin-right:auto">
+      <strong style="font-weight:500;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:.4rem">Before you submit</strong>
+      Claude reads what you write, not what you tick. Write as much as you can about what you have actually done — the more specific you are, the more useful the feedback will be.
+    </p>
+    <button class="btn-submit" onclick="submitForm()">Generate indicative feedback ↗</button>
+    <p class="submit-note">Your responses will be read by Claude · Feedback is indicative only · Not a confirmed mark</p>
+  </div>
+
+  <div class="doc-footer">
+    <span>PM7000 · Graduate Diploma Creative Practice · Kingston School of Art</span>
+    <span>Aligned to AG1 2025–26 Level 7 Descriptors · AR3 2024–25</span>
+  </div>
+
+</div>
+</div><!-- end form screen -->
+
+
+<!-- ═══════════════════════════ LOADING SCREEN ════════════════════════ -->
+<div id="screen-loading" class="screen">
+<div class="wrap">
+  <div class="loading active">
+    <div class="spinner"></div>
+    <p class="loading-title">Generating feedback</p>
+    <div class="loading-steps">
+      <span id="ls1">Reading your responses</span><br>
+      <span id="ls2">Applying AG1 Level 7 descriptors</span><br>
+      <span id="ls3">Mapping to PM7000 learning outcomes</span><br>
+      <span id="ls4">Identifying discussion points for tutorial</span><br>
+      <span id="ls5">Preparing indicative grade band</span>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- ═══════════════════════════ FEEDBACK SCREEN ══════════════════════ -->
+<div id="screen-feedback" class="screen">
+<div class="feedback-wrap">
+
+  <div class="fb-header">
+    <div>
+      <p style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-bottom:.35rem">PM7000 — Graduate Diploma Creative Practice</p>
+      <h1>Indicative Feedback Report</h1>
+      <p style="font-size:12px;color:var(--mid);margin-top:.25rem">Based on self-assessment · Aligned to AG1 2025–26 Level 7 Descriptors</p>
+    </div>
+    <div class="fb-meta" id="fb-meta"></div>
+  </div>
+
+  <!-- grade card injected here -->
+  <div id="fb-grade"></div>
+
+  <!-- feedback sections injected here -->
+  <div id="fb-sections"></div>
+
+  <!-- tutor notes injected here -->
+  <div id="fb-tutor"></div>
+
+  <div class="disclaimer">
+    This report is indicative only. It is generated from the student's own self-assessment responses and has not been produced by reading physical portfolio work. Grade bands are approximate and based on the evidence described by the student. The confirmed mark will be determined by the module tutor following assessment of the submitted portfolio against the PM7000 Learning Outcomes and Kingston University AG1 2025–26 Level 7 Descriptors. This document is intended as a tutorial discussion tool, not an official assessment record.
+  </div>
+
+  <div class="action-row">
+    <button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+    <button class="btn" onclick="copyFeedback()">Copy feedback text</button>
+    <button class="btn" onclick="resetForm()">New submission</button>
+  </div>
+
+  <div class="doc-footer">
+    <span>PM7000 · Graduate Diploma Creative Practice · Kingston School of Art</span>
+    <span id="fb-footer-date"></span>
+  </div>
+
+</div>
+</div>
+
+
+<script>
+// ── RATINGS ──────────────────────────────────────────────────────────
+const ratings = {r1:null,r2:null,r3:null,r4:null};
+function rate(group, el){
+  document.querySelectorAll(`#${group} .r-opt`).forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+  ratings[group] = el.textContent.trim();
+}
+
+// ── CHECKBOXES ───────────────────────────────────────────────────────
+function chk(row){ row.querySelector('.cl-box').classList.toggle('chk') }
+
+// ── GATHER DATA ──────────────────────────────────────────────────────
+function gatherData(){
+  return {
+    name: document.getElementById('f-name').value.trim() || 'Student',
+    k: document.getElementById('f-k').value.trim() || '—',
+    title: document.getElementById('f-title').value.trim() || '—',
+    date: document.getElementById('f-date').value || new Date().toISOString().split('T')[0],
+    sections: {
+      research: {
+        secondary: document.getElementById('s1q1').value.trim(),
+        primary: document.getElementById('s1q2').value.trim(),
+        synthesis: document.getElementById('s1q3').value.trim(),
+        rating: ratings.r1,
+        gap: document.getElementById('s1gap').value.trim()
+      },
+      experimentation: {
+        range: document.getElementById('s2q1').value.trim(),
+        risk: document.getElementById('s2q2').value.trim(),
+        skills: document.getElementById('s2q3').value.trim(),
+        rating: ratings.r2,
+        gap: document.getElementById('s2gap').value.trim()
+      },
+      communication: {
+        outcome: document.getElementById('s3q1').value.trim(),
+        audience: document.getElementById('s3q2').value.trim(),
+        written: document.getElementById('s3q3').value.trim(),
+        rating: ratings.r3,
+        gap: document.getElementById('s3gap').value.trim()
+      },
+      reflection: {
+        gibbs: document.getElementById('s4q1').value.trim(),
+        feedback: document.getElementById('s4q2').value.trim(),
+        professional: document.getElementById('s4q3').value.trim(),
+        rating: ratings.r4,
+        gap: document.getElementById('s4gap').value.trim()
+      }
+    },
+    priorities: [
+      document.getElementById('p1').value.trim(),
+      document.getElementById('p2').value.trim(),
+      document.getElementById('p3').value.trim()
+    ]
+  };
+}
+
+// ── LOADING STEPS ─────────────────────────────────────────────────────
+function animateLoading(){
+  const steps = ['ls1','ls2','ls3','ls4','ls5'];
+  let i = 0;
+  const iv = setInterval(()=>{
+    if(i > 0) document.getElementById(steps[i-1]).className='done';
+    if(i < steps.length){
+      document.getElementById(steps[i]).className='active';
+      i++;
+    } else { clearInterval(iv); }
+  }, 1200);
+}
+
+// ── BUILD PROMPT ──────────────────────────────────────────────────────
+function buildPrompt(data){
+  return `You are providing indicative pre-submission feedback for a PM7000 Graduate Diploma Creative Practice student at Kingston School of Art.
+
+CONTEXT:
+- This feedback is based entirely on the student's own self-assessment responses
+- You have NOT seen the physical portfolio work
+- All feedback must be aligned to Kingston University Academic Guidance 1 (AG1) 2025-26 Level 7 Descriptors
+- The feedback will be used as discussion points in a pre-submission tutorial
+- It is indicative only — not a confirmed mark
+
+STUDENT DETAILS:
+Name: ${data.name}
+K Number: ${data.k}
+Project Title: ${data.title}
+
+STUDENT SELF-ASSESSMENT RESPONSES:
+
+SECTION 1 — RESEARCH AND ANALYSIS (LO2, LO3)
+Secondary research: ${data.sections.research.secondary || 'No response provided'}
+Primary research: ${data.sections.research.primary || 'No response provided'}
+Synthesis and methodology: ${data.sections.research.synthesis || 'No response provided'}
+Student's own rating: ${data.sections.research.rating || 'Not rated'}
+Identified gap/action: ${data.sections.research.gap || 'None identified'}
+
+SECTION 2 — EXPERIMENTATION AND PRACTICE (LO1, LO6)
+Range of experimentation: ${data.sections.experimentation.range || 'No response provided'}
+Risk and iteration: ${data.sections.experimentation.risk || 'No response provided'}
+Skills development: ${data.sections.experimentation.skills || 'No response provided'}
+Student's own rating: ${data.sections.experimentation.rating || 'Not rated'}
+Identified gap/action: ${data.sections.experimentation.gap || 'None identified'}
+
+SECTION 3 — COMMUNICATION, AUDIENCE AND PRESENTATION (LO4, LO6)
+Final outcome and presentation: ${data.sections.communication.outcome || 'No response provided'}
+Audience and context: ${data.sections.communication.audience || 'No response provided'}
+Written communication: ${data.sections.communication.written || 'No response provided'}
+Student's own rating: ${data.sections.communication.rating || 'Not rated'}
+Identified gap/action: ${data.sections.communication.gap || 'None identified'}
+
+SECTION 4 — PERSONAL AND PROFESSIONAL DEVELOPMENT (LO5)
+Critical reflection (Gibbs): ${data.sections.reflection.gibbs || 'No response provided'}
+Response to feedback: ${data.sections.reflection.feedback || 'No response provided'}
+Professional identity: ${data.sections.reflection.professional || 'No response provided'}
+Student's own rating: ${data.sections.reflection.rating || 'Not rated'}
+Identified gap/action: ${data.sections.reflection.gap || 'None identified'}
+
+PRIORITY ACTIONS IDENTIFIED BY STUDENT:
+1. ${data.priorities[0] || 'Not identified'}
+2. ${data.priorities[1] || 'Not identified'}
+3. ${data.priorities[2] || 'Not identified'}
+
+YOUR TASK:
+Produce a structured feedback report in valid JSON matching EXACTLY this schema:
+
+{
+  "indicativeGrade": {
+    "band": "string — e.g. 'B to B+' or 'C+ to B-'",
+    "marks": "string — e.g. '63–67' or '55–62'",
+    "descriptor": "string — one sentence using AG1 Level 7 language, e.g. 'The work demonstrates a well-developed aptitude in applying knowledge in unfamiliar contexts, synthesising ideas in innovative ways'",
+    "caveat": "string — one sentence reminding that this is based on self-assessment only"
+  },
+  "sections": [
+    {
+      "id": "research",
+      "title": "Research and analysis",
+      "lo": "LO2 · LO3",
+      "strengths": "string — 2-3 sentences on what the student describes well, using AG1 Level 7 descriptor language",
+      "development": "string — 2-3 sentences identifying what is weak or missing, referencing specific AG1 criteria",
+      "action": "string — one specific, actionable recommendation before submission"
+    },
+    {
+      "id": "experimentation",
+      "title": "Experimentation and practice",
+      "lo": "LO1 · LO6",
+      "strengths": "string",
+      "development": "string",
+      "action": "string"
+    },
+    {
+      "id": "communication",
+      "title": "Communication, audience and presentation",
+      "lo": "LO4 · LO6",
+      "strengths": "string",
+      "development": "string",
+      "action": "string"
+    },
+    {
+      "id": "reflection",
+      "title": "Personal and professional development",
+      "lo": "LO5",
+      "strengths": "string",
+      "development": "string",
+      "action": "string"
+    }
+  ],
+  "tutorDiscussionPoints": [
+    "string — specific question or point for the tutor to raise in the pre-submission tutorial",
+    "string",
+    "string",
+    "string",
+    "string"
+  ],
+  "overallObservation": "string — 2-3 sentences of overall observation about the portfolio as described, what is most impressive and what most needs attention before submission"
+}
+
+IMPORTANT RULES FOR YOUR RESPONSE:
+1. Use AG1 Level 7 descriptor language precisely — phrases like "well-developed aptitude", "demonstrates exceptional ability to", "synthesising ideas in innovative ways", "limited and inconsistent", "does not demonstrate"
+2. Be honest — if responses are thin or vague, say so clearly and kindly
+3. Never invent portfolio content — only respond to what the student has described
+4. The tutorDiscussionPoints should be genuinely useful questions a tutor can ask in a 20-minute pre-submission meeting
+5. Return ONLY valid JSON. No markdown, no preamble, no explanation outside the JSON object.`;
+}
+
+// ── SUBMIT ────────────────────────────────────────────────────────────
+async function submitForm(){
+  const data = gatherData();
+
+  // basic validation
+  const hasContent = Object.values(data.sections).some(s=>
+    Object.entries(s).some(([k,v])=> k!=='rating' && k!=='gap' && v.length > 10)
+  );
+  if(!hasContent){
+    alert('Please complete at least some of the text fields before submitting.');
+    return;
+  }
+
+  // switch screens
+  document.getElementById('screen-form').classList.remove('active');
+  document.getElementById('screen-loading').classList.add('active');
+  animateLoading();
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{role:'user',content:buildPrompt(data)}]
+      })
+    });
+
+    const result = await response.json();
+    const raw = result.content[0].text;
+
+    // parse JSON — strip any accidental markdown fences
+    const clean = raw.replace(/^```json\s*/,'').replace(/\s*```$/,'').trim();
+    const fb = JSON.parse(clean);
+
+    // render feedback
+    renderFeedback(data, fb);
+
+    // switch to feedback screen
+    document.getElementById('screen-loading').classList.remove('active');
+    document.getElementById('screen-feedback').classList.add('active');
+    window.scrollTo(0,0);
+
+  } catch(err){
+    document.getElementById('screen-loading').classList.remove('active');
+    document.getElementById('screen-form').classList.add('active');
+    alert('Something went wrong generating feedback. Please try again.\n\nError: ' + err.message);
+  }
+}
+
+// ── RENDER FEEDBACK ───────────────────────────────────────────────────
+function renderFeedback(data, fb){
+  // meta
+  document.getElementById('fb-meta').innerHTML =
+    `<span>${data.name}</span><br><span>${data.k}</span><br><span>${data.date}</span>`;
+  document.getElementById('fb-footer-date').textContent =
+    'Indicative only · ' + new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'});
+
+  // grade card
+  document.getElementById('fb-grade').innerHTML = `
+    <div class="grade-card">
+      <div>
+        <div class="grade-band">${fb.indicativeGrade.band}</div>
+        <div class="grade-band-sub">${fb.indicativeGrade.marks} · Indicative</div>
+      </div>
+      <div class="grade-right">
+        <div class="grade-descriptor">${fb.indicativeGrade.descriptor}</div>
+        <div class="grade-note">${fb.indicativeGrade.caveat}</div>
+      </div>
+    </div>`;
+
+  // overall observation
+  document.getElementById('fb-grade').innerHTML += `
+    <div class="fb-section" style="margin-bottom:1.25rem">
+      <div class="fb-section-head">
+        <span class="fb-section-title">Overall observation — ${data.title}</span>
+      </div>
+      <div class="fb-body"><p>${fb.overallObservation}</p></div>
+    </div>`;
+
+  // sections
+  let sectionsHTML = '';
+  fb.sections.forEach(s=>{
+    sectionsHTML += `
+      <div class="fb-section">
+        <div class="fb-section-head">
+          <span class="lo-tag">${s.lo}</span>
+          <span class="fb-section-title">${s.title}</span>
+        </div>
+        <div class="fb-body">
+          <p><strong style="font-weight:500">Strengths</strong><br>${s.strengths}</p>
+          <p><strong style="font-weight:500">For development</strong><br>${s.development}</p>
+          <p><strong style="font-weight:500">Action before submission</strong><br>${s.action}</p>
+        </div>
+      </div>`;
+  });
+  document.getElementById('fb-sections').innerHTML = sectionsHTML;
+
+  // tutor discussion points
+  let tutorHTML = `
+    <div class="tutor-notes">
+      <div class="tutor-notes-head">Tutor discussion points — pre-submission tutorial</div>
+      <div class="tutor-notes-body">`;
+  fb.tutorDiscussionPoints.forEach(pt=>{
+    tutorHTML += `<div class="tutor-note-item"><div class="note-dot"></div><span>${pt}</span></div>`;
+  });
+  tutorHTML += `</div></div>`;
+  document.getElementById('fb-tutor').innerHTML = tutorHTML;
+}
+
+// ── COPY FEEDBACK ─────────────────────────────────────────────────────
+function copyFeedback(){
+  const el = document.getElementById('screen-feedback');
+  const text = el.innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    alert('Feedback text copied to clipboard. You can paste this into Speedgrader or a feedback document.');
+  }).catch(()=>{
+    alert('Copy failed — please select and copy the text manually.');
+  });
+}
+
+// ── RESET ──────────────────────────────────────────────────────────────
+function resetForm(){
+  if(confirm('Start a new submission? This will clear the current feedback.')){
+    document.getElementById('screen-feedback').classList.remove('active');
+    document.getElementById('screen-form').classList.add('active');
+    window.scrollTo(0,0);
+  }
+}
+</script>
+</body>
+</html>

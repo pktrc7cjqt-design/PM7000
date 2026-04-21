@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AG1 Level 7 — Classification Descriptors · PM7000</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --black:#1a1a18;
+  --mid:#5a5a56;
+  --light:#b0b0aa;
+  --rule:#deded8;
+  --bg:#f4f4ef;
+  --white:#ffffff;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'IBM Plex Sans',sans-serif;
+}
+
+body{
+  font-family:var(--sans);
+  font-weight:300;
+  color:var(--black);
+  background:var(--bg);
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+.page{
+  width:420mm;
+  min-height:297mm;
+  background:var(--white);
+  margin:10mm auto;
+  padding:14mm 16mm 14mm;
+  position:relative;
+}
+
+/* ── HEADER ── */
+.page-header{
+  border-top:2.5px solid var(--black);
+  padding:4mm 0 3.5mm;
+  margin-bottom:5mm;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:end;
+  border-bottom:0.5px solid var(--rule);
+}
+.header-left .tag{
+  font-family:var(--mono);
+  font-size:7.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--mid);
+  margin-bottom:2mm;
+}
+.header-left h1{
+  font-size:20px;
+  font-weight:500;
+  line-height:1.1;
+  margin-bottom:1.5mm;
+}
+.header-left .sub{
+  font-size:10px;
+  color:var(--mid);
+}
+.header-right{
+  font-family:var(--mono);
+  font-size:7.5px;
+  color:var(--light);
+  text-align:right;
+  line-height:1.8;
+}
+
+/* ── INTRO ── */
+.intro-row{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:4mm;
+  margin-bottom:5mm;
+  border-bottom:0.5px solid var(--rule);
+  padding-bottom:4mm;
+}
+.intro-cell{
+  font-size:8.5px;
+  line-height:1.65;
+  color:var(--mid);
+}
+.intro-cell strong{
+  font-weight:500;
+  font-family:var(--mono);
+  font-size:7.5px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--black);
+  display:block;
+  margin-bottom:1.5mm;
+}
+
+/* ── GRADE HEADER BAR ── */
+.grade-bar{
+  display:grid;
+  grid-template-columns:52mm 1fr 1fr 1fr 1fr 1fr;
+  gap:0;
+  margin-bottom:3mm;
+}
+.gb-cell{
+  font-family:var(--mono);
+  font-size:7.5px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  text-align:center;
+  padding:2mm 2mm;
+  border:0.5px solid var(--rule);
+  border-right:none;
+  line-height:1.5;
+}
+.gb-cell:last-child{border-right:0.5px solid var(--rule)}
+.gb-cell.label{
+  text-align:left;
+  background:var(--bg);
+  color:var(--mid);
+  font-size:7px;
+  border-right:0.5px solid var(--rule);
+}
+.gb-distinction{background:#1a1a18;color:#fff}
+.gb-merit{background:#3a3a36;color:#fff}
+.gb-pass{background:#6b6b67;color:#fff}
+.gb-marginal{background:#b0b0aa;color:#1a1a18}
+.gb-fail{background:#e0e0da;color:#5a5a56}
+
+.gb-marks{
+  font-size:9px;
+  font-weight:500;
+  display:block;
+  margin-bottom:1px;
+}
+.gb-grade{
+  font-size:7px;
+  opacity:.8;
+}
+
+/* ── DESCRIPTOR TABLE ── */
+.descriptor-table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.descriptor-table tr{
+  border-bottom:0.5px solid var(--rule);
+}
+.descriptor-table tr:last-child{
+  border-bottom:none;
+}
+
+.descriptor-table td{
+  padding:2.5mm 2.5mm;
+  font-size:8px;
+  line-height:1.55;
+  vertical-align:top;
+  border-right:0.5px solid var(--rule);
+}
+.descriptor-table td:last-child{border-right:none}
+
+/* Row label cell */
+.td-label{
+  width:52mm;
+  background:var(--bg);
+  border-right:0.5px solid var(--black) !important;
+}
+.td-label-title{
+  font-family:var(--mono);
+  font-size:7.5px;
+  font-weight:500;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--black);
+  display:block;
+  margin-bottom:1.5mm;
+}
+.td-label-lo{
+  font-family:var(--mono);
+  font-size:6.5px;
+  letter-spacing:.08em;
+  color:var(--mid);
+  padding:1px 4px;
+  border:0.5px solid var(--light);
+  display:inline-block;
+  margin-bottom:1.5mm;
+}
+.td-label-desc{
+  font-size:7.5px;
+  color:var(--mid);
+  line-height:1.55;
+}
+
+/* Content cells */
+.td-distinction{color:var(--black)}
+.td-merit{color:var(--black)}
+.td-pass{color:var(--black)}
+.td-marginal{color:var(--mid)}
+.td-fail{color:var(--light)}
+
+/* Alternating row bg */
+.descriptor-table tr:nth-child(odd) td:not(.td-label){
+  background:#fafaf8;
+}
+
+/* ── KEY PHRASES ── */
+.key-phrases{
+  margin-top:4mm;
+  padding-top:3.5mm;
+  border-top:0.5px solid var(--rule);
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:3mm;
+}
+.kp-col{}
+.kp-band{
+  font-family:var(--mono);
+  font-size:7px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--mid);
+  margin-bottom:2mm;
+  padding-bottom:1mm;
+  border-bottom:0.5px solid var(--rule);
+}
+.kp-item{
+  font-size:7.5px;
+  line-height:1.6;
+  color:var(--black);
+  padding-left:6px;
+  border-left:1.5px solid var(--rule);
+  margin-bottom:1.5mm;
+}
+.kp-item.strong{
+  font-weight:500;
+  border-left-color:var(--black);
+}
+
+/* ── FOOTER ── */
+.page-footer{
+  position:absolute;
+  bottom:8mm;
+  left:16mm;
+  right:16mm;
+  display:flex;
+  justify-content:space-between;
+  font-family:var(--mono);
+  font-size:6.5px;
+  letter-spacing:.06em;
+  color:var(--light);
+  border-top:0.5px solid var(--rule);
+  padding-top:2mm;
+}
+
+/* ── PRINT ── */
+@media print{
+  body{background:white}
+  .page{margin:0;box-shadow:none}
+  @page{size:A3 landscape;margin:0}
+}
+
+@media screen{
+  .page{box-shadow:0 2px 20px rgba(0,0,0,.07)}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div class="header-left">
+      <p class="tag">PM7000 · Graduate Diploma Creative Practice · Kingston School of Art</p>
+      <h1>AG1 Level 7 — Classification Descriptors</h1>
+      <p class="sub">Academic Guidance 1, 2025–26 · Use this sheet when completing your self-assessment and when describing your portfolio work</p>
+    </div>
+    <div class="header-right">
+      Kingston University<br>
+      AG1 2025–26<br>
+      Level 7 only
+    </div>
+  </div>
+
+  <!-- INTRO ROW -->
+  <div class="intro-row">
+    <div class="intro-cell">
+      <strong>What this sheet is</strong>
+      These are the official words Kingston University uses to describe the standard of work at each grade band at Level 7. When you write about your portfolio — in tutorials, self-assessments, or reflections — using this language shows the assessor you understand the standard expected of you.
+    </div>
+    <div class="intro-cell">
+      <strong>How to use it</strong>
+      Read across the row for each area of your work. Find the column that best matches what you have done. The language in that cell is the language you should be using to describe your work. It is not boasting — it is the correct academic register for this level.
+    </div>
+    <div class="intro-cell">
+      <strong>Important note</strong>
+      Describing your work well is part of demonstrating Level 7 capability. A student who says "I did some research" and a student who says "I synthesised primary and secondary sources to generate transformative solutions" may have done similar work — but only one is communicating at postgraduate level.
+    </div>
+  </div>
+
+  <!-- GRADE HEADER BAR -->
+  <div class="grade-bar">
+    <div class="gb-cell label">Area of assessment</div>
+    <div class="gb-cell gb-distinction">
+      <span class="gb-marks">70+</span>
+      <span class="gb-grade">Distinction · A+/A/A-</span>
+    </div>
+    <div class="gb-cell gb-merit">
+      <span class="gb-marks">60–69</span>
+      <span class="gb-grade">Merit · B+/B/B-</span>
+    </div>
+    <div class="gb-cell gb-pass">
+      <span class="gb-marks">50–59</span>
+      <span class="gb-grade">Pass · C+/C/C-</span>
+    </div>
+    <div class="gb-cell gb-marginal">
+      <span class="gb-marks">45–49</span>
+      <span class="gb-grade">Marginal fail · FM</span>
+    </div>
+    <div class="gb-cell gb-fail">
+      <span class="gb-marks">44–</span>
+      <span class="gb-grade">Fail · F</span>
+    </div>
+  </div>
+
+  <!-- DESCRIPTOR TABLE -->
+  <table class="descriptor-table">
+
+    <tr>
+      <td class="td-label">
+        <span class="td-label-title">Research &amp; analysis</span>
+        <span class="td-label-lo">LO2 · LO3</span>
+        <span class="td-label-desc">How you find, use and synthesise sources. Primary and secondary research. Methodology.</span>
+      </td>
+      <td class="td-distinction">Consistently demonstrates exceptional aptitude in applying knowledge in unfamiliar contexts, synthesising ideas in innovative ways. Shows outstanding insight in selecting advanced methodological approaches and critically evaluating their effectiveness.</td>
+      <td class="td-merit">Demonstrates well-developed aptitude in applying knowledge in unfamiliar contexts, synthesising ideas in innovative ways. Shows good insight in selecting appropriate advanced methodological approaches and critically evaluating their effectiveness.</td>
+      <td class="td-pass">Demonstrates aptitude in applying knowledge in unfamiliar contexts, synthesising ideas in innovative ways. Shows some insight in selecting appropriate methodological approaches and evaluating their effectiveness.</td>
+      <td class="td-marginal">Demonstrates little aptitude in applying knowledge in unfamiliar contexts. Shows inconsistent insight in selecting methodological approaches and limited ability to evaluate their effectiveness.</td>
+      <td class="td-fail">Does not demonstrate aptitude in applying knowledge in unfamiliar contexts. Shows a lack of insight in selecting methodological approaches and no ability to critically evaluate them.</td>
+    </tr>
+
+    <tr>
+      <td class="td-label">
+        <span class="td-label-title">Experimentation &amp; practice</span>
+        <span class="td-label-lo">LO1 · LO6</span>
+        <span class="td-label-desc">Risk-taking, iteration, testing approaches, skills development, production process.</span>
+      </td>
+      <td class="td-distinction">Consistently shows exceptional creativity through risk-taking and innovation in the adoption of multiple approaches to challenging problems. Demonstrates exceptional ability to autonomously implement and evaluate improvements to practice, drawing on innovative sectoral best practice.</td>
+      <td class="td-merit">Shows highly developed creativity through risk-taking and innovation in the adoption of multiple approaches. Demonstrates good ability to autonomously implement and evaluate improvements to practice, drawing on sectoral best practice.</td>
+      <td class="td-pass">Shows creativity through risk-taking and innovation in the adoption of multiple approaches. Demonstrates ability to autonomously implement and evaluate improvements to practice.</td>
+      <td class="td-marginal">Shows little evidence of creativity through risk-taking. Demonstrates some limited but inconsistent ability to autonomously implement and evaluate improvements to practice.</td>
+      <td class="td-fail">Does not show evidence of creativity through risk-taking. Does not demonstrate the ability to autonomously implement and evaluate improvements to practice.</td>
+    </tr>
+
+    <tr>
+      <td class="td-label">
+        <span class="td-label-title">Communication &amp; presentation</span>
+        <span class="td-label-lo">LO4 · LO6</span>
+        <span class="td-label-desc">Final outcome quality. Audience awareness. Written communication. Coherence of portfolio.</span>
+      </td>
+      <td class="td-distinction">Consistently demonstrates exceptional ability to communicate effectively through oral, written and visual mediums. Outcomes are realised with outstanding critical awareness of target audience in a range of established and emerging contexts.</td>
+      <td class="td-merit">Demonstrates good ability to communicate effectively through oral, written and visual mediums. Outcomes are realised with good critical awareness of target audience in a range of established and emerging contexts.</td>
+      <td class="td-pass">Demonstrates ability to communicate effectively through oral, written and visual mediums. Outcomes are realised with critical awareness of target audience in established and emerging contexts.</td>
+      <td class="td-marginal">Demonstrates limited ability to communicate effectively. Outcomes are realised with some but limited critical awareness of target audience.</td>
+      <td class="td-fail">Does not demonstrate ability to communicate effectively. Outcomes are not realised with critical awareness of target audience.</td>
+    </tr>
+
+    <tr>
+      <td class="td-label">
+        <span class="td-label-title">Personal &amp; professional development</span>
+        <span class="td-label-lo">LO5</span>
+        <span class="td-label-desc">Gibbs reflection. Response to feedback. Self-criticality. Professional identity.</span>
+      </td>
+      <td class="td-distinction">Consistently demonstrates exceptional ability to use personal reflection to analyse self and own actions. Reflects outstanding talent to make connections between known and unknown areas, allowing for adaptation and change, with exceptional self-criticality.</td>
+      <td class="td-merit">Demonstrates good ability to use personal reflection to analyse self and own actions. Reflects well-developed talent to make connections between known and unknown areas, with high levels of self-criticality.</td>
+      <td class="td-pass">Demonstrates ability to use personal reflection to analyse self and own actions. Reflects talent to make connections between known and unknown areas, with self-criticality.</td>
+      <td class="td-marginal">Demonstrates limited and inconsistent ability to use personal reflection. Shows limited talent to make connections and limited self-criticality.</td>
+      <td class="td-fail">Does not demonstrate ability to use personal reflection to analyse self and own actions. Fails to make connections between known and unknown areas.</td>
+    </tr>
+
+    <tr>
+      <td class="td-label">
+        <span class="td-label-title">Conceptual thinking &amp; analysis</span>
+        <span class="td-label-lo">LO1 · LO2</span>
+        <span class="td-label-desc">Critical responses to theory. Use of abstraction. Generating new ideas from existing frameworks.</span>
+      </td>
+      <td class="td-distinction">Consistently uses exceptional ideas at a high level of abstraction. Develops exceptionally critical responses to existing theoretical discourses, methodologies or practices and suggests sophisticated new concepts or approaches.</td>
+      <td class="td-merit">Uses well-developed ideas at a high level of abstraction. Develops highly critical responses to existing theoretical discourses and practices, and suggests new concepts or approaches.</td>
+      <td class="td-pass">Uses ideas at a high level of abstraction. Develops critical responses to existing theoretical discourses and practices, and suggests new concepts or approaches.</td>
+      <td class="td-marginal">Shows limited and inconsistent use of ideas at a high level of abstraction. Develops limited critical responses and rarely suggests new concepts or approaches.</td>
+      <td class="td-fail">Does not use ideas at a high level of abstraction. Does not develop critical responses to theoretical discourses, nor suggest new concepts or approaches.</td>
+    </tr>
+
+  </table>
+
+  <!-- KEY PHRASES -->
+  <div class="key-phrases">
+    <div class="kp-col">
+      <div class="kp-band">Distinction · 70+</div>
+      <div class="kp-item strong">Consistently demonstrates</div>
+      <div class="kp-item strong">Exceptional / Outstanding</div>
+      <div class="kp-item">Sophisticated novel outcomes</div>
+      <div class="kp-item">Transformative solutions</div>
+      <div class="kp-item">Outstanding insight</div>
+      <div class="kp-item">Innovative ways</div>
+      <div class="kp-item">Exceptional self-criticality</div>
+    </div>
+    <div class="kp-col">
+      <div class="kp-band">Merit · 60–69</div>
+      <div class="kp-item strong">Well-developed</div>
+      <div class="kp-item strong">Good ability / Good insight</div>
+      <div class="kp-item">Synthesising ideas innovatively</div>
+      <div class="kp-item">Highly critical responses</div>
+      <div class="kp-item">Highly developed creativity</div>
+      <div class="kp-item">High levels of self-criticality</div>
+      <div class="kp-item">Good substantive investigations</div>
+    </div>
+    <div class="kp-col">
+      <div class="kp-band">Pass · 50–59</div>
+      <div class="kp-item strong">Demonstrates aptitude</div>
+      <div class="kp-item strong">Demonstrates ability</div>
+      <div class="kp-item">Some insight</div>
+      <div class="kp-item">Critical responses</div>
+      <div class="kp-item">Shows creativity</div>
+      <div class="kp-item">Substantive investigations</div>
+      <div class="kp-item">Self-criticality</div>
+    </div>
+    <div class="kp-col">
+      <div class="kp-band">Marginal fail · 45–49</div>
+      <div class="kp-item">Little aptitude</div>
+      <div class="kp-item">Limited and inconsistent</div>
+      <div class="kp-item">Little evidence of creativity</div>
+      <div class="kp-item">Inconsistent insight</div>
+      <div class="kp-item">Limited critical responses</div>
+      <div class="kp-item">Rarely suggests</div>
+      <div class="kp-item">Limited self-criticality</div>
+    </div>
+    <div class="kp-col">
+      <div class="kp-band">Fail · 44 and below</div>
+      <div class="kp-item">Does not demonstrate</div>
+      <div class="kp-item">Lack of insight</div>
+      <div class="kp-item">No evidence</div>
+      <div class="kp-item">Does not show</div>
+      <div class="kp-item">Fails to</div>
+      <div class="kp-item">Does not develop</div>
+      <div class="kp-item">Inadequate</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <span>PM7000 · Graduate Diploma Creative Practice · Kingston School of Art</span>
+    <span>Source: Academic Guidance 1 (AG1) 2025–26 · Level 7 Outcome Classification Descriptors · Kingston University</span>
+    <span>For use in self-assessment and pre-submission tutorial sessions</span>
+  </div>
+
+</div>
+</body>
+</html>
