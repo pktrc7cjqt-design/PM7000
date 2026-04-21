@@ -1236,7 +1236,7 @@ async function submitForm(){
     });
 
     const result = await response.json();
-   if(!result.content || !result.content[0]){throw new Error('API returned: '+JSON.stringify(result));}const raw = result.content[0].text;
+   if(!result.con<div class="grade-band">${fb.indicativeGrade ? (fb.indicativeGrade.band || fb.indicativeGrade.gradeBand || 'B') : 'B'}</div>
 
     // parse JSON — strip any accidental markdown fences
     const clean = raw.replace(/^```json\s*/,'').replace(/\s*```$/,'').trim();
